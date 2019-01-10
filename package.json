@@ -1,0 +1,24 @@
+{
+  "name": "react-frame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack-dev-server --inline --host 127.0.0.1 --content-base demo/",
+    "build": "webpack -w --progress --config webpack.build.config.js",
+    "demo": "webpack -w --progress --config webpack.demo.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.28.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
