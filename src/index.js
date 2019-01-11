@@ -72,4 +72,3 @@ class DetailFrame extends Component {
         )
     }
 }
-console.log("​DetailFrame", DetailFrame, Component)

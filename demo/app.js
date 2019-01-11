@@ -12,7 +12,6 @@ function Template(props) {
         </div>
     )
 }
-console.log(SingleDetail)
 const first = new SingleDetail("first", (props) => {
     return (
         <Template title="first" content={props.detail.content} returnBtn={props.btnReturnVisible} return={props.returnDetail}>
