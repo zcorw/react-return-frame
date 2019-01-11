@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-    module: "development",
+    mode: "development",
     entry: {
         "app": './demo/app',
     },

@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-function connect(macroDetail) {
+export function connect(macroDetail) {
     if (!(macroDetail instanceof MacroDetail)) {
         throw Error(`TypeError: argument ${detail} is not a MacroDetail`);
     }
     const option = macroDetail.get();
-    return function component(defaultKey, defaultDetail) {
-        return (props) => <DetailFrame defaultKey={defaultKey} defaultDetail={defaultDetail} detailOption={option} {...props}/>;
+    return function component(defaultPage, defaultDetail) {
+        return (props) => <DetailFrame defaultPage={defaultPage} defaultDetail={defaultDetail} detailOption={option} {...props}/>;
     };
 }
 
-class SingleDetail {
+export class SingleDetail {
     constructor(key, _component) {
-        if (!(_component instanceof Component) && typeof _component !== "function" ) {
+        if (!(Component.isPrototypeOf(_component)) && typeof _component !== "function" ) {
             throw Error(`TypeError: argument 2 ${_component} is not a function or a Component`);
         }
         this.data = {[key]: _component}
     }
     set(key, _component) {
-        if (!(_component instanceof Component) && typeof _component !== "function" ) {
+        if (!(Component.isPrototypeOf(_component)) && typeof _component !== "function" ) {
             throw Error(`TypeError: argument 2 ${_component} is not a function or a Component`);
         }
         this.data = { [key]: _component };
@@ -29,11 +29,13 @@ class SingleDetail {
     }
 }
 
-class MacroDetail {
-    data = {}
+export class MacroDetail {
+    constructor() {
+        this.data = {};
+    }
     set(detail) {
-        if (!(detail instanceof SingleDetail)) {
-            throw Error(`TypeError: argument ${detail} is not a SingleDetail`);
+        if (!(detail instanceof SingleDetail) && !(detail instanceof MacroDetail) ) {
+            throw Error(`TypeError: argument ${detail} is not a SingleDetail or a MacroDetail`);
         }
         this.data = Object.assign({}, this.data, detail.get());
         return this;
@@ -42,18 +44,11 @@ class MacroDetail {
         return this.data;
     }
 }
-
-export default {
-    connect,
-    SingleDetail,
-    MacroDetail,
-};
-
 class DetailFrame extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detailKey: props.defaultKey,
+            detailKey: props.defaultPage,
             detail: props.defaultDetail,
         };
         this.returnStack = [];
@@ -73,7 +68,8 @@ class DetailFrame extends Component {
         const {detailOption, defaultKey, defaultDetail, ...props} = this.props;
         const Detail = detailOption[this.state.detailKey];
         return (
-            <Detail {...props} detail={this.state.detail} />
+            <Detail {...props} detail={this.state.detail} showDetail={this.showDetail.bind(this)} returnDetail={this.returnDetail.bind(this)} btnReturnVisible={this.returnStack.length > 0} />
         )
     }
 }
+console.log("​DetailFrame", DetailFrame, Component)
