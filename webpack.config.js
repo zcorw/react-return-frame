@@ -16,5 +16,13 @@ module.exports = {
                 loader: ['babel-loader'],
             },
         ]
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'demo'),
+        compress: true,
+        inline: true,
+        port: 9000,
+        overlay: true,
+        noInfo: false,
     }
 }
