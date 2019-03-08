@@ -24,7 +24,11 @@ npm run start
 
 ### <a name="use">快速上手</a>
 
-先将src/index.js拷贝到你的项目中。
+从npm安装
+
+```
+npm install react-return-frame
+```
 
 本组件由三个部分组成，SingleDetail、MacroDetail、connect，下面分别说明下这三部分的作用和使用方法。
 
